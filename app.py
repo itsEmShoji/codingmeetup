@@ -1,6 +1,7 @@
 import json
 from flask import Flask, request
-app = Flask(__name__)  # instance of Flask class, it's our application. We pass the name of the module.
+# instance of Flask class, it's our application. We pass the name of the module.
+app = Flask(__name__)
 
 with open('names.json') as f:
     # the names dictionary is saved in the memory
@@ -11,12 +12,13 @@ with open('names.json') as f:
 # route decorator specifies what URL should trigger our function
 @app.route('/names/<string:name>', methods=['GET'])
 def get_name_meaning(name):
-    pass
+    capitalized = name.capitalize()
+    return names[capitalized]
 
 
 @app.route('/names', methods=['GET'])
 def get_all_names():
-    return "We'll have all names returned here"
+    return names
 
 
 @app.route('/names', methods=['POST'])
@@ -26,4 +28,7 @@ def create_name():
 
 @app.route('/names/<string:name>', methods=['DELETE'])
 def remove_name(name):
-    pass
+    capitalized = name.capitalize()
+    for n in names:
+        if n == capitalized:
+            del names[capitalized]
