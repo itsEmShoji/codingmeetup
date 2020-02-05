@@ -23,7 +23,20 @@ def get_all_names():
 
 @app.route('/names', methods=['POST'])
 def create_name():
-    pass
+    data = request.json  # data sent in POST request body
+    print(f'Adding {data} to our list of names')
+
+    keys = list(data)
+
+    name = keys[0]
+    name_capitalized = name.capitalize()
+    status = 201
+
+    if name_capitalized in names:
+        status = 200
+    names[name_capitalized] = data[name]
+
+    return data, status
 
 
 @app.route('/names/<string:name>', methods=['DELETE'])

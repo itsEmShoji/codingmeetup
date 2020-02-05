@@ -25,9 +25,11 @@ def create_name():
     data = request.json  # data sent in POST request body
     print(f'Adding {data} to our list of names')
 
-    keys = list(data)  # running list on data dictionary returns a list of all of the keys in the dictionary
+    # running list on data dictionary returns a list of all of the keys in the dictionary
+    keys = list(data)
     # e.g. list({"anabella": 1, "brendon": 2}) => ["anabella", "brendon"]
-    name = keys[0]  # select the first key in the dictionary. We should have only one key anyways
+    # select the first key in the dictionary. We should have only one key anyways
+    name = keys[0]
     name_capitalized = name.capitalize()
     status = 201
 
